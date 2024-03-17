@@ -91,7 +91,7 @@ class _EditUserScreenState extends State<EditUserScreen> {
     String jsonData = jsonEncode(userData);
 
     // Send a PUT request to update the user on the API
-    Uri apiUrl = Uri.parse('http://192.168.1.162:3000/users/$id');
+    Uri apiUrl = Uri.parse('http://192.168.1.200:3000/users/$id');
     http.Response response = await http.put(
       apiUrl,
       headers: {

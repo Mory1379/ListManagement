@@ -145,7 +145,7 @@ class _UserListScreenState extends State<UserListScreen> {
 Future<void> deleteUser(User user) async {
   try {
     final response = await http.delete(
-      Uri.parse('http://192.168.1.167:3000/users/${user.nationalId}'),
+      Uri.parse('http://192.168.1.200:3000/users/${user.nationalId}'),
       headers: {
         'Content-Type': 'application/json',
       },
@@ -277,7 +277,7 @@ class _AddUserScreenState extends State<AddUserScreen> {
       );
       try {
         final response = await http.post(
-          Uri.parse('http://192.168.1.167:3000/users'),
+          Uri.parse('http://192.168.1.200:3000/users'),
           body: json.encode(newUser.toJson()),
           headers: {'Content-Type': 'application/json'},
         );
