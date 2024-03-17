@@ -142,34 +142,6 @@ class _UserListScreenState extends State<UserListScreen> {
   deleteUser(User user) {}
 }
 
-Future<void> deleteUser(User user) async {
-  try {
-    final response = await http.delete(
-      Uri.parse('http://192.168.1.200:3000/users/${user.nationalId}'),
-      headers: {
-        'Content-Type': 'application/json',
-      },
-    );
-
-    if (response.statusCode == 200) {
-      print('User deleted successfully');
-    } else {
-      // Handle unsuccessful response
-      print('Failed to delete user. Status code: ${response.statusCode}');
-      // Optionally, you can handle different status codes differently
-      if (response.statusCode == 404) {
-        print('User not found on the server');
-      }
-      // You might want to show an error message to the user here
-      throw Exception('Failed to delete user');
-    }
-  } catch (e) {
-    // Handle exceptions
-    print('Error deleting user: $e');
-    // You might want to show an error message to the user here
-  }
-}
-
 class UserDetailsScreen extends StatelessWidget {
   final User user;
 
@@ -259,6 +231,34 @@ class _AddUserScreenState extends State<AddUserScreen> {
         ),
       ),
     );
+  }
+
+  Future<void> deleteUser(User user) async {
+    try {
+      final response = await http.delete(
+        Uri.parse('http://192.168.1.200:3000/users/${user.id}'),
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      );
+
+      if (response.statusCode == 200) {
+        print('User deleted successfully');
+      } else {
+        // Handle unsuccessful response
+        print('Failed to delete user. Status code: ${response.statusCode}');
+        // Optionally, you can handle different status codes differently
+        if (response.statusCode == 404) {
+          print('User not found on the server');
+        }
+        // You might want to show an error message to the user here
+        throw Exception('Failed to delete user');
+      }
+    } catch (e) {
+      // Handle exceptions
+      print('Error deleting user: $e');
+      // You might want to show an error message to the user here
+    }
   }
 
 
