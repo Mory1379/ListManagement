@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'EditUser.dart';
+import 'dart:developer';
+
 
 void main() {
   runApp(MyApp());
@@ -91,11 +93,12 @@ class _UserListScreenState extends State<UserListScreen> {
                 IconButton(
                   icon: Icon(Icons.delete),
                   onPressed: () {
+                    log('show dialoggggg');
                     showDialog(
                         context: context,
                         builder: (context) => AlertDialog(
                         title: Text('حذف کاربر'),
-                        content: Text('آیا از حذف کاربر ${users[index].firstName} ${users[index].lastName} مطمئن هستید؟'),
+                        content: Text('آیا از حذفa کاربر ${users[index].firstName} ${users[index].lastName} مطمئن هستید؟'),
                         actions: [
                           TextButton(
                             onPressed: () {
@@ -106,6 +109,7 @@ class _UserListScreenState extends State<UserListScreen> {
                           TextButton(
                             onPressed: () async {
                               await deleteUser(users[index]);
+                              log('delete-------');
                               Navigator.pop(context, true);
                             },
                             child: Text('بله'),
@@ -139,7 +143,33 @@ class _UserListScreenState extends State<UserListScreen> {
     );
   }
 
-  deleteUser(User user) {}
+  Future<void> deleteUser(User user) async {
+    try {
+      final response = await http.delete(
+        Uri.parse('http://192.168.1.200:3000/users/${user.id}'),
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      );
+
+      if (response.statusCode == 200) {
+        print('User deleted successfully');
+      } else {
+        // Handle unsuccessful response
+        print('Failed to delete user. Status code: ${response.statusCode}');
+        // Optionally, you can handle different status codes differently
+        if (response.statusCode == 404) {
+          print('User not found on the server');
+        }
+        // You might want to show an error message to the user here
+        throw Exception('Failed to delete user');
+      }
+    } catch (e) {
+      // Handle exceptions
+      print('Error deleting user: $e');
+      // You might want to show an error message to the user here
+    }
+  }
 }
 
 class UserDetailsScreen extends StatelessWidget {
@@ -233,33 +263,7 @@ class _AddUserScreenState extends State<AddUserScreen> {
     );
   }
 
-  Future<void> deleteUser(User user) async {
-    try {
-      final response = await http.delete(
-        Uri.parse('http://192.168.1.200:3000/users/${user.nationalId}'),
-        headers: {
-          'Content-Type': 'application/json',
-        },
-      );
 
-      if (response.statusCode == 200) {
-        print('User deleted successfully');
-      } else {
-        // Handle unsuccessful response
-        print('Failed to delete user. Status code: ${response.statusCode}');
-        // Optionally, you can handle different status codes differently
-        if (response.statusCode == 404) {
-          print('User not found on the server');
-        }
-        // You might want to show an error message to the user here
-        throw Exception('Failed to delete user');
-      }
-    } catch (e) {
-      // Handle exceptions
-      print('Error deleting user: $e');
-      // You might want to show an error message to the user here
-    }
-  }
 
 
   void addUser() async {

@@ -1,12 +1,6 @@
 {
   "users": [
     {
-      "id": "1",
-      "firstName": "ahmad",
-      "lastName": "kolivand",
-      "nationalId": "418001158"
-    },
-    {
       "id": "2",
       "firstName": "saeed",
       "lastName": "biranvnd",
@@ -23,18 +17,6 @@
       "firstName": "mmd",
       "lastName": "alavi",
       "nationalId": "42432434244442"
-    },
-    {
-      "id": "1",
-      "firstName": "a title",
-      "lastName": "gregfreg",
-      "nationalId": "418001157"
-    },
-    {
-      "id": "1",
-      "firstName": "a title",
-      "lastName": "gregfreg",
-      "nationalId": "418001157"
     }
   ]
 }
