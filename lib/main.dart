@@ -236,7 +236,7 @@ class _AddUserScreenState extends State<AddUserScreen> {
   Future<void> deleteUser(User user) async {
     try {
       final response = await http.delete(
-        Uri.parse('http://192.168.1.200:3000/users/${user.id}'),
+        Uri.parse('http://192.168.1.200:3000/users/${user.nationalId}'),
         headers: {
           'Content-Type': 'application/json',
         },
