@@ -154,7 +154,7 @@ class _UserListScreenState extends State<UserListScreen> {
         },
       ),
       floatingActionButton: FloatingActionButton(
-
+        backgroundColor: Colors.blue,
         onPressed: () {
           Navigator.push(
             context,
@@ -163,7 +163,7 @@ class _UserListScreenState extends State<UserListScreen> {
             ),
           );
         },
-        child: Icon(Icons.add),
+        child: Icon(Icons.add,color: Colors.white,),
       ),
     );
   }
