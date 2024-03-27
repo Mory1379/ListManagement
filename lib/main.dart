@@ -58,7 +58,31 @@ class _UserListScreenState extends State<UserListScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        backgroundColor: Colors.blue,
+        titleTextStyle: TextStyle(color: Colors.white),
         title: Text('User List'),
+      ),
+      drawer: Drawer(
+        child: ListView(
+        children: [
+          UserAccountsDrawerHeader(accountName: Text('Admin'),accountEmail: Text('Milad Hatami')),
+
+        ListTile(
+          title: Text('privacy'),
+          leading: Icon(Icons.book),
+          onTap: (){}
+        ),
+
+          ListTile(
+            title: Text('privacy'),
+            leading: Icon(Icons.book)
+          ),
+
+          ListTile(
+            title: Text('privacy'),
+            leading: Icon(Icons.book)
+          )
+        ],),
       ),
       body: ListView.builder(
         itemCount: users.length,
